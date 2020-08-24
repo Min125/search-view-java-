@@ -1,0 +1,62 @@
+room data base
+==============
+1. in app module’s top level
+
+	apply plugin: 'kotlin-kapt‘
+
+2. Update the gradle dependencies in build.gradle App Module.
+
+	def room_version = "2.2.3"
+	implementation "androidx.room:room-runtime:$room_version"
+
+	kapt "androidx.room:room-compiler:$room_version“
+
+	implementation "androidx.room:room-ktx:$room_version"
+
+3. create model package and create book file
+
+	@Entity
+	class Book {
+
+		@PrimaryKey
+		@ColumnInfo(name = "id")
+		var bookID : Int,
+
+		@ColumnInfo (name = "book_name")
+		var bookName : String,
+}
+
+4. create dao package and create bookdao file
+
+	@Dao
+	interface BooKDao{
+		@Query(value = "Select * from Book")
+		fun getAllBook () : List<Book>
+
+		@Insert (onConflict = onConflictStrategy.IGNORE)
+		fun saveBook(book: Book)
+	}
+
+5. create database package and create bookDatabase file
+
+	@Database(entities = [(Book::class)],version = 1)
+	abstract class BookDatabase : RoomDatabase(){
+		abstract fun bookDao() : BooKDao
+	}
+
+6. main activity 
+
+        val db = Room.databaseBuilder(
+                applicationContext,
+                BookDatabase::class.java,
+                "BookDB"
+        ).build()
+
+        Thread{
+            val book = Book(
+                    1,
+                    "android book"
+            )
+            db.bookDao().saveBook(book)
+
+            db.bookDao().getAllBook().forEach  	

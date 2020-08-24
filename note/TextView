@@ -1,0 +1,5 @@
+TextView 
+
+maxLine = "2"
+singleLine = "true"
+ellipsize = "marquee"   // line ......

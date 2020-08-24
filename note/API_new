@@ -1,0 +1,75 @@
+
+
+News API
+========
+
+postman
+
+https://newsapi.org/v2/top-headlines?country=us&apiKey=8f4b1cee839b43ab80645baee4a33881
+
+base url  	= https://newsapi.org/v2/
+end point	= top-headlines
+query 		= ?country=us&apiKey=8f4b1cee839b43ab80645baee4a33881
+
+
+
+
+1. Add required dependencies in app-level build.gradle
+
+implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+2. ApiInterface : 
+					interface NewsApiInterface{
+						@GET("top-headlines")
+						fun getTopHeadLine (
+							@Query("country") country : String,
+							@Query("apiKey") apiKey : String
+						):Call<News>
+					}
+					
+3. Apiclass		:
+					class NewsApiClient {
+						private val BASE_URL = "https://newsapi.org/v2/"
+
+						private val apiInterface : NewsApiInterface
+
+						init {	
+							var retrofit = Retrofit.Builder()
+								.baseUrl(BASE_URL)
+								.addConverterFactory(GsonConverterFactory.create())
+								.build()
+							apiInterface = retrofit.create(NewsApiInterface::class.java)
+						}
+
+						fun getTopHeadLine(): Call<News>{
+							return apiInterface.getTopHeadLine("us","8f4b1cee839b43ab80645baee4a33881")
+						}
+
+					}
+4. Fragment 	:
+					override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+						super.onViewCreated(view, savedInstanceState)
+						var apiClient = NewsApiClient()
+
+						var apiCall = apiClient.getTopHeadLine()
+
+						apiCall.enqueue(
+							object : Callback<News>{
+								override fun onFailure(call: Call<News>, t: Throwable) {
+									TODO("Not yet implemented")
+								}
+
+								override fun onResponse(call: Call<News>, response: Response<News>) {
+									txtResponse.text = response.body()?.articles.toString()
+								}
+							}
+						)
+					}
+					
+					
+note mutableLIVE DATA SO <mutableLIVE>.value nae htae ya ml .
+
+
+progress bar
+=========== 

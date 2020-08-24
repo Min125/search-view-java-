@@ -1,0 +1,84 @@
+API Json retrofit
+=================
+-web app database shi ka data twe yu ml so yin json ko 3 pe yu tl.
+
+1. Add required dependencies in app-level build.gradle
+
+implementation ‘com.squareup.retrofit2:retrofit:2.3.0’
+implementation ‘com.squareup.retrofit2:converter-gson:2.3.0’
+
+2. install plugin setting > plugins > marketplace 	> json to kotlin Class (find in search box) for kotlin
+													> RoboPOJO Genrator for Java 
+
+
+3. create model package and right click to "Kotlin Data class from JSON" > Fill Json data in appear window and assign class name and click "OK"
+
+4. create api package and add two kotlin class file "ApiClient class and ApiInterface "
+
+5. ApiInterface : 
+					interface ApiInterface {
+							@GET("posts")
+							fun getPost(): Call<ArrayList<PostItem>>
+						}
+
+6. ApiClient : 
+					class ApiClient {
+						
+						private val BASE_URL = "https://my-json-server.typicode.com/typicode/demo/"
+
+						private var retrofit : Retrofit? = null
+
+						init {
+
+							if (retrofit == null){
+							retrofit = Retrofit.Builder()
+							.baseUrl(BASE_URL)
+							.addConverterFactory(GsonConverterFactory.create())
+							.build()
+							}
+						}
+							
+						val postApiService = retrofit!!.create(ApiInterface::class.java)
+					}
+
+7. main class : 
+					fun getPosts (){
+					val apiClient = ApiClient()
+					val apiCall = apiClient.postApiService.getPost()
+
+					apiCall.enqueue(
+						object  : Callback<ArrayList<PostItem>>{
+							override fun onFailure(call: Call<ArrayList<PostItem>>, t: Throwable) {
+								txtResponse.text = t.toString()
+								Toast.makeText(
+									applicationContext,
+									t.toString(),
+									Toast.LENGTH_LONG
+								).show()
+							}
+
+							override fun onResponse(
+								call: Call<ArrayList<PostItem>>,
+								response: Response<ArrayList<PostItem>>
+							) {
+								txtResponse.text = response.body().toString() // data htwet chin yin body()
+									Toast.makeText(
+									applicationContext,
+									response.toString(),
+									Toast.LENGTH_LONG
+									)
+								}
+							}
+						)
+					}
+
+retrofit support converter **Gson**, Jackson, **Moshi**, Protobuf, Wire, Simple XML, JAXB, SCALARS
+
+
+http so "clear text service"
+
+
+fragment 
+view model
+navigation
+recycler view

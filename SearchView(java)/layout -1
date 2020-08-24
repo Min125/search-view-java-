@@ -1,0 +1,90 @@
+android
+-------
+
+layout
+------
+linear layout ( first android layout)
+relative layout	
+constrate layout (power full layout)(support by google)
+
+
+layout_height / width
+-------------
+
+-match_parent (fill screen side)
+-wrap_content (depend on program content)
+
+
+Orientation
+------------
+android:orientation=""
+-vertical
+-horizontal
+
+Size value 
+----------	
+sp (font size)
+dp (Margin and time
+
+padding = inside 
+margin  = outside
+
+Relative layout
+---------------
+
+android:layout_below	
+android:layout_toRightOf	
+android:layout_toLeftOf
+
+Image View
+----------
+		android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/view"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description"
+		
+		
+		2F6394
+		
+		
+constraite layout
+-----------------
+
+must have minimum one horizontal and vertical constraite
+if set margin value only work constraiteof 
+
+layout_constraintLeft_toLeftOf
+
+layout_constraintLeft_toRightOf
+
+layout_constraintRight_toLeftOf
+
+layout_constraintRight_toRightOf
+
+layout_constraintTop_toTopOf
+
+layout_constraintTop_toBottomOf
+
+layout_constraintBottom_toTopOf
+
+layout_constraintBottom_toBottomOf
+
+layout_constraintBaseline_toBaselineOf
+
+layout_constraintStart_toEndOf
+
+layout_constraintStart_toStartOf
+
+layout_constraintEnd_toStartOf
+
+layout_constraintEnd_toEndOf
+
+
+
+
+color code
+==========
+
+use ARGP for transprance color transparent 

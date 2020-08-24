@@ -1,0 +1,15 @@
+API Patch
+=========
+
+https://my-json-server.typicode.com/typicode/demo/posts
+
+BaseUrl = https://my-json-server.typicode.com/typicode/demo/
+Query   = posts
+Patch   = posts/2
+
+API Interface : =>
+@GET("posts/{postID}")
+    fun getPostWidthID(
+        @Path("postID")postID : String
+    ) : Call<PostItem>
+	

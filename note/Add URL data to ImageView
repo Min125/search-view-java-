@@ -1,0 +1,26 @@
+Add URL link to ImageView Src
+=============================
+
+1.picasso 
+2.glide
+
+
+
+1.Picasso
+=========
+https://square.github.io/picasso/
+
+
+2.Glide
+=======
+1. add libery in build.gradel 
+	implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:glide:4.11.0'
+
+2. add binding function in adapter view holder class
+	 var img : String = boyItem.img_url
+            if (img !== null){
+                Glide.with(itemView).load(img).into(itemView.photo)
+            }
+
+		

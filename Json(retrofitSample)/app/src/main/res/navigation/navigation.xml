@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/boyFragment">
+
+    <fragment
+        android:id="@+id/boyFragment"
+        android:name="coder.mtk.jsonretrofitsample.fragments.BoyFragment"
+        android:label="fragment_boy"
+        tools:layout="@layout/fragment_boy" />
+    <fragment
+        android:id="@+id/girlFragment"
+        android:name="coder.mtk.jsonretrofitsample.fragments.GirlFragment"
+        android:label="fragment_girl"
+        tools:layout="@layout/fragment_girl" >
+        <action
+            android:id="@+id/action_girlFragment_to_boyFragment"
+            app:destination="@id/boyFragment" />
+    </fragment>
+</navigation>
